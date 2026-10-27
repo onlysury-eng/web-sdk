@@ -70,7 +70,7 @@
 				frameHeight + framePadding * 2,
 				frameRadius,
 			)
-				.fill({ color: PLACEHOLDER_PALETTE.boardCell, alpha: 0.35 })
+				.fill({ color: PLACEHOLDER_PALETTE.boardCell, alpha: 0.93 })
 				.stroke({ width: SYMBOL_SIZE * 0.08, color: PLACEHOLDER_PALETTE.frameFill });
 
 			// dashed inner accent
