@@ -6,6 +6,47 @@ export const SYMBOL_SIZE = 80;
 
 export const REEL_PADDING = 0.53;
 
+// Set to false once real symbol art is wired up in SYMBOL_INFO_MAP / assets.ts.
+// While true, symbols render as flat procedural shapes instead of textures.
+export const USE_PLACEHOLDER_SYMBOLS = true;
+
+// Set to false once real background / frame art is wired up.
+export const USE_PLACEHOLDER_ART = true;
+
+// Title shown in the UI while placeholders are active. Replace with your game name.
+export const PLACEHOLDER_GAME_TITLE = 'CLUSTER GAME';
+export const PLACEHOLDER_LOGO_TEXT = 'ADD YOUR LOGO';
+
+// Placeholder palette. Art direction only — change these to match your theme.
+export const PLACEHOLDER_PALETTE = {
+	baseBackgroundTop: 0x8fd6f5,
+	baseBackgroundBottom: 0xf7b2d0,
+	featureBackgroundTop: 0xd7b6f2,
+	featureBackgroundBottom: 0x8a5bb8,
+	frameFill: 0xfff6ec,
+	frameBorder: 0xff9ec4,
+	frameAccent: 0xff5c8a,
+	frameDash: 0xff5c8a,
+	boardCell: 0xffe8d6,
+	panel: 0xffb3cd,
+	winGlow: 0xfff3a0,
+} as const;
+
+// Fruit theme. `draw` names a shape in SymbolPlaceholder.svelte; `label` is the
+// fallback text and accessibility name. Never gameplay data.
+export const PLACEHOLDER_SYMBOL_STYLES = {
+	H1: { shape: 'watermelon', color: 0xff4d6d, accent: 0x2e8b57, label: 'WATERMELON' },
+	H2: { shape: 'orange', color: 0xff9f1c, accent: 0xffd166, label: 'ORANGE' },
+	H3: { shape: 'grapes', color: 0x8e5bd0, accent: 0x4b2e83, label: 'GRAPES' },
+	H4: { shape: 'lemon', color: 0xffd93d, accent: 0xffe97f, label: 'LEMON' },
+	L1: { shape: 'apple', color: 0xe63946, accent: 0x7cb342, label: 'APPLE' },
+	L2: { shape: 'pear', color: 0xb5d134, accent: 0x7cb342, label: 'PEAR' },
+	L3: { shape: 'plum', color: 0x9b4dca, accent: 0x6a2c91, label: 'PLUM' },
+	L4: { shape: 'blueberry', color: 0x4a6fd4, accent: 0x2f4a9e, label: 'BLUEBERRY' },
+	W: { shape: 'star', color: 0xffb703, accent: 0xffffff, label: 'WILD', ring: true },
+	S: { shape: 'starburst', color: 0xff5c8a, accent: 0xfff3a0, label: 'SCATTER', ring: true },
+} as const;
+
 // initial board (padded top and bottom)
 export const INITIAL_BOARD: RawSymbol[][] = [
 	[
@@ -243,7 +284,6 @@ export const HIGH_SYMBOLS = ['H1', 'H2', 'H3', 'H4', 'H5'];
 
 export const INITIAL_SYMBOL_STATE: SymbolState = 'static';
 
-const M_SIZE = 0.3;
 const HIGH_SYMBOL_SIZE = 0.9;
 const LOW_SYMBOL_SIZE = 0.9;
 const SPECIAL_SYMBOL_SIZE = 1;
@@ -305,20 +345,6 @@ const l4Static = { type: 'sprite', assetKey: 'l4.webp', sizeRatios: { width: 1, 
 
 const sStatic = { type: 'sprite', assetKey: 's.png', sizeRatios: { width: 1.243, height: 1.243 } };
 const wStatic = { type: 'sprite', assetKey: 'w.png', sizeRatios: { width: 1.12, height: 1.12 } };
-
-const m2Static = {
-	type: 'sprite',
-	assetKey: 'm1_2x.png',
-	sizeRatios: { width: 0.88, height: 0.88 },
-};
-const m4Static = {
-	type: 'sprite',
-	assetKey: 'm1_4x.png',
-	sizeRatios: { width: 0.88, height: 0.88 },
-};
-const m5Static = { type: 'sprite', assetKey: 'm2_5x.png', sizeRatios: { width: 1, height: 1 } };
-const m7Static = { type: 'sprite', assetKey: 'm2_7x.png', sizeRatios: { width: 1, height: 1 } };
-const m10Static = { type: 'sprite', assetKey: 'm3_10x.png', sizeRatios: { width: 1, height: 1 } };
 
 const wSizeRatios = { width: 1.5 * 0.9, height: SPECIAL_SYMBOL_SIZE * 1.15 };
 const sSizeRatios = { width: 2.5, height: SPECIAL_SYMBOL_SIZE * 2.3 };
